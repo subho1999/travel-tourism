@@ -81,10 +81,10 @@ cities=[
        room_service:false,
        view:true,
        }];
-
+var n=3;
 let login = new mongoose.model("log", userSchema);
 let place=new mongoose.model('place',placeSchema);
-for(var i=0;i<name;i++){
+for(var i=0;i<n;i++){
     place.create(cities[i],(err,response)=>{
         if(err)
         throw new Error(err);
@@ -185,7 +185,7 @@ app.post('/responses',(req,res)=>{
             console.log(placeName)
             res.redirect('/suggestion');
         }
-        console.log(response);
+        console.log(responses);
     });
 });
 app.get('/suggestion',(req,res)=>{
