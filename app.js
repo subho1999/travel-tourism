@@ -11,7 +11,7 @@ db.on("error", console.error.bind(console, "Connnection Error -"));
 db.once("open", () => {
   console.log("Database Connected");
 });
-var signupInfo, loginInfo, name;
+var signupInfo, loginInfo, name,responses,placeName;
 var flag = 0;
 let userSchema = mongoose.Schema({
   fname: String,
@@ -19,8 +19,78 @@ let userSchema = mongoose.Schema({
   email: String,
   password: String
 });
-let login = new mongoose.model("log", userSchema);
+let placeSchema=mongoose.Schema({
+    name:String,
+    beach:Boolean,
+    hiking:Boolean,
+    history:Boolean,
+    nature:Boolean,
+    cities:Boolean,
+    sweet:Boolean,
+    spice:Boolean,
+    surprise:Boolean,
+    luxury:Boolean,
+    room_service:Boolean,
+    view:Boolean
+})
+cities=[
+    {
+    name:"goa",
+    beach:true,
+    hiking:false,
+    history:true,
+    nature:true,
+    cities:true,
+    sweet:false,
+    spice:true,
+    surprise:true,
+    
+    luxury:true,
+    room_service:true,
+    view:true,
+    },
 
+
+{
+        name:"rajasthan",
+        beach:false,
+        hiking:false,
+       history:true,
+       nature:false,
+       cities:true,
+       sweet:true,
+       spice:true,
+       surprise:false,
+   
+       luxury:true,
+       room_service:true,
+       view:true,
+       },
+{
+        name:"srinagar",
+        beach:false,
+        hiking:true,
+       history:true,
+       nature:true,
+       cities:false,
+       sweet:true,
+       spice:false,
+       surprise:true,
+   
+       luxury:true,
+       room_service:false,
+       view:true,
+       }];
+
+let login = new mongoose.model("log", userSchema);
+let place=new mongoose.model('place',placeSchema);
+for(var i=0;i<name;i++){
+    place.create(cities[i],(err,response)=>{
+        if(err)
+        throw new Error(err);
+        else console.log('Data Added');
+    });
+}
 app.use(express.static(__dirname + "/public"));
 app.use(body.urlencoded({ extended: true }));
 app.set("view engine", "ejs");
@@ -87,6 +157,38 @@ app.post("/loginCheck", (req, res) => {
 app.get("/logout", (req, res) => {
   flag = 0;
   res.render("logoutPage", { flag: flag, name: name });
+});
+
+
+app.post('/responses',(req,res)=>{
+    responses={
+        beach:req.body.beach,
+        hiking:req.body.hiking,
+        history:req.body.history,
+        nature:req.body.nature,
+        cities:req.body.cities,
+        sweet:req.body.sweet,
+        spice:req.body.spice,
+        surprise:req.body.surprise,
+        luxury:req.body.luxury,
+        room_service:req.body.room_service,
+        view:req.body.view
+        
+    };
+
+    place.find(responses,(err,response)=>{
+        if(err)
+        console.log('Error has occured in finding place.');
+        else{
+            placeName=response.name;
+            console.log(placeName)
+            res.redirect('/suggestion');
+        }
+        console.log(response);
+    });
+});
+app.get('/suggestion',(req,res)=>{
+    res.render('suggestion',{flag: flag, name: name, placeName:placeName})
 });
 
 app.listen(3000, process.env.ID, () => {
