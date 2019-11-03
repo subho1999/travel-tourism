@@ -160,6 +160,7 @@ app.get("/logout", (req, res) => {
 });
 
 
+
 app.post('/responses',(req,res)=>{
     responses={
         beach:req.body.beach,
