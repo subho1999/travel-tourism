@@ -89,6 +89,6 @@ app.get("/logout", (req, res) => {
   res.render("logoutPage", { flag: flag, name: name });
 });
 
-app.listen(3000, process.env.ID, () => {
+app.listen(process.env.PORT || 3000, () => {
   console.log("Server Started");
 });
