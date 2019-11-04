@@ -21,64 +21,64 @@ let userSchema = mongoose.Schema({
 });
 let placeSchema = mongoose.Schema({
   name: String,
-  beach: Boolean,
-  hiking: Boolean,
-  history: Boolean,
-  nature: Boolean,
-  cities: Boolean,
-  sweet: Boolean,
-  spice: Boolean,
-  surprise: Boolean,
-  luxury: Boolean,
-  room_service: Boolean,
-  view: Boolean
+  beach: String,
+  hiking: String,
+  history: String,
+  nature: String,
+  cities: String,
+  sweet: String,
+  spice: String,
+  surprise: String,
+  luxury: String,
+  room_service: String,
+  view: String
 });
 cities = [
   {
     name: "goa",
-    beach: true,
-    hiking: false,
-    history: true,
-    nature: true,
-    cities: true,
-    sweet: false,
-    spice: true,
-    surprise: true,
+    beach: "true",
+    hiking: "false",
+    history: "true",
+    nature: "true",
+    cities: "true",
+    sweet: "false",
+    spice: "true",
+    surprise: "true",
 
-    luxury: true,
-    room_service: true,
-    view: true
+    luxury: "true",
+    room_service: "true",
+    view: "true"
   },
 
   {
     name: "rajasthan",
-    beach: false,
-    hiking: false,
-    history: true,
-    nature: false,
-    cities: true,
-    sweet: true,
-    spice: true,
-    surprise: false,
+    beach: "false",
+    hiking: "false",
+    history: "true",
+    nature: "false",
+    cities: "true",
+    sweet: "true",
+    spice: "true",
+    surprise: "false",
 
-    luxury: true,
-    room_service: true,
-    view: true
+    luxury: "true",
+    room_service: "true",
+    view: "true"
   },
   {
     name: "srinagar",
-    beach: false,
-    hiking: true,
-    history: true,
-    nature: true,
-    cities: false,
-    sweet: true,
-    spice: false,
-    surprise: true,
+    beach: "false",
+    hiking: "true",
+    history: "true",
+    nature: "true",
+    cities: "false",
+    sweet: "true",
+    spice: "false",
+    surprise: "true",
 
-    luxury: true,
-    room_service: false,
-    view: true
+    luxury: "true",
+    room_service: "false",
+    view: "true"
   }
 ];
 var n = 3;
@@ -147,8 +147,8 @@ app.post("/loginCheck", (req, res) => {
       } else {
         flag = 1;
         res.redirect("/");
+        name = response[0].fname + " " + response[0].lname;
       }
-      name = response[0].fname + " " + response[0].lname;
     }
   });
 });
