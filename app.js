@@ -11,7 +11,7 @@ db.on("error", console.error.bind(console, "Connnection Error -"));
 db.once("open", () => {
   console.log("Database Connected");
 });
-var signupInfo, loginInfo, name,responses,placeName;
+var signupInfo, loginInfo, name,responses;
 var flag = 0;
 let userSchema = mongoose.Schema({
   fname: String,
@@ -21,65 +21,62 @@ let userSchema = mongoose.Schema({
 });
 let placeSchema=mongoose.Schema({
     name:String,
-    beach:Boolean,
-    hiking:Boolean,
-    history:Boolean,
-    nature:Boolean,
-    cities:Boolean,
-    sweet:Boolean,
-    spice:Boolean,
-    surprise:Boolean,
-    luxury:Boolean,
-    room_service:Boolean,
-    view:Boolean
+    beach:String,
+    hiking:String,
+    history:String,
+    nature:String,
+    cities:String,
+    sweet:String,
+    spice:String,
+    surprise:String,
+    luxury:String,
+    room_service:String,
+    view:String
 })
 cities=[
     {
     name:"goa",
-    beach:true,
-    hiking:false,
-    history:true,
-    nature:true,
-    cities:true,
-    sweet:false,
-    spice:true,
-    surprise:true,
-    
-    luxury:true,
-    room_service:true,
-    view:true,
+    beach:'op1',
+    hiking:'op2',
+    history:'op1',
+    nature:'op1',
+    cities:'op1',
+    sweet:'op2',
+    spice:'op1',
+    surprise:'op1',
+    luxury:'op1',
+    room_service:'op1',
+    view:'op1',
     },
 
 
 {
         name:"rajasthan",
-        beach:false,
-        hiking:false,
-       history:true,
-       nature:false,
-       cities:true,
-       sweet:true,
-       spice:true,
-       surprise:false,
-   
-       luxury:true,
-       room_service:true,
-       view:true,
+        beach:'op2',
+        hiking:'op2',
+       history:'op1',
+       nature:'op2',
+       cities:'op1',
+       sweet:'op1',
+       spice:'op1',
+       surprise:'op2',
+       luxury:'op1',
+       room_service:'op1',
+       view:'op1',
        },
 {
         name:"srinagar",
-        beach:false,
-        hiking:true,
-       history:true,
-       nature:true,
-       cities:false,
-       sweet:true,
-       spice:false,
-       surprise:true,
-   
-       luxury:true,
-       room_service:false,
-       view:true,
+        beach:'op2',
+        hiking:'op1',
+       history:'op1',
+       nature:'op1',
+       cities:'op2',
+       sweet:'op1',
+       spice:'op2',
+       surprise:'op1',
+       luxury:'op1',
+       room_service:'op2',
+       view:'op1',
        }];
 var n=3;
 let login = new mongoose.model("log", userSchema);
@@ -94,23 +91,6 @@ for(var i=0;i<n;i++){
 app.use(express.static(__dirname + "/public"));
 app.use(body.urlencoded({ extended: true }));
 app.set("view engine", "ejs");
-
-app.get("/", (req, res) => {
-  res.render("index", { flag: flag, name: name });
-});
-app.get("/packages", (req, res) => {
-  res.render("package", { flag: flag, name: name });
-});
-app.get("/signup", (req, res) => {
-  res.render("signup", { flag: flag, name: name });
-});
-app.get("/login", (req, res) => {
-  res.render("login", { flag: flag, name: name });
-});
-app.get("/experience", (req, res) => {
-  res.render("experience", { flag: flag, name: name });
-});
-
 app.post("/signupPost", (req, res) => {
   signupInfo = {
     fname: req.body.fname,
@@ -126,13 +106,8 @@ app.post("/signupPost", (req, res) => {
     }
   });
 });
-app.get("/success", (req, res) => {
-  res.render("success", { flag: flag, name: name });
-});
 
-app.get("/notFound", (req, res) => {
-  res.render("notFound");
-});
+
 
 app.post("/loginCheck", (req, res) => {
   loginInfo = {
@@ -147,7 +122,7 @@ app.post("/loginCheck", (req, res) => {
         res.redirect("/notFound");
       } else {
         flag = 1;
-        res.redirect("/");
+        res.redirect("/index");
       }
       name = response[0].fname + " " + response[0].lname;
     }
@@ -176,20 +151,27 @@ app.post('/responses',(req,res)=>{
         view:req.body.view
         
     };
-
+    place.find({name:'goa'},(err,resp)=>{
+        console.log(resp);
+    });
+    let placeSuggest;
     place.find(responses,(err,response)=>{
         if(err)
         console.log('Error has occured in finding place.');
         else{
-            placeName=response.name;
-            console.log(placeName)
+            placeSuggest=response.name;
+            // console.log(response+"Objectblah");
             res.redirect('/suggestion');
         }
-        console.log(responses);
+        // console.log("Response="+responses);
     });
 });
 app.get('/suggestion',(req,res)=>{
-    res.render('suggestion',{flag: flag, name: name, placeName:placeName})
+    res.render('suggestion',{flag: flag, name: name, placeSuggest:placeSuggest})
+});
+app.get('/:route',(req,res)=>{
+  var strRoute=req.params.route;
+  res.render(strRoute,{ flag: flag, name: name })
 });
 
 app.listen(3000, process.env.ID, () => {
