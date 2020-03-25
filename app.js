@@ -174,6 +174,6 @@ app.get('/:route',(req,res)=>{
   res.render(strRoute,{ flag: flag, name: name })
 });
 
-app.listen(3000, process.env.ID, () => {
+app.listen(process.env.port||8080, () => {
   console.log("Server Started");
 });
