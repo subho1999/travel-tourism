@@ -4,7 +4,7 @@
   "description": "Additional Learning ",
   "main": "app.js",
   "scripts": {
-    "start": "node app",
+    "start": "node app.js",
     "dev": "nodemon app"
   },
   "author": "Advaitva Gupta",
