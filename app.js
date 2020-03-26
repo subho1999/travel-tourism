@@ -121,9 +121,7 @@ app.post("/signupPost", (req, res) => {
   });
 });
 
-app.get('/',(req,res)=>{
-  res.redirect('/index');
-})
+
 
 app.post("/loginCheck", (req, res) => {
   loginInfo = {
@@ -168,7 +166,7 @@ app.post('/responses',(req,res)=>{
     place.find({name:'goa'},(err,resp)=>{
         console.log(resp);
     });
-    let placeSuggest;
+    
     place.find(responses,(err,response)=>{
         if(err)
         console.log('Error has occured in finding place.');
@@ -183,6 +181,9 @@ app.post('/responses',(req,res)=>{
 app.get('/suggestion',(req,res)=>{
     res.render('suggestion',{flag: flag, name: name, placeSuggest:placeSuggest})
 });
+app.get('/',(req,res)=>{
+  res.redirect('/index');
+})
 app.get('/:route',(req,res)=>{
   var strRoute=req.params.route;
   res.render(strRoute,{ flag: flag, name: name })
