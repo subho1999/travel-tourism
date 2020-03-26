@@ -14,6 +14,7 @@
     "cors": "^2.8.5",
     "ejs": "^2.7.1",
     "express": "^4.17.1",
+    "ico": "^0.3.3",
     "mongoose": "^5.7.7",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
@@ -21,8 +22,8 @@
     "request": "^2.88.0"
   },
   "devDependencies": {
-    "nodemon": "^1.19.4",
-    "minimist": ">=1.2.2"
+    "minimist": "^1.2.5",
+    "nodemon": "^1.19.4"
   },
   "repository": {
     "type": "git",

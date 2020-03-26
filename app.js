@@ -121,7 +121,9 @@ app.post("/signupPost", (req, res) => {
   });
 });
 
-
+app.get('/',(req,res)=>{
+  res.redirect('/index');
+})
 
 app.post("/loginCheck", (req, res) => {
   loginInfo = {
