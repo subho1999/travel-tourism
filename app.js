@@ -13,10 +13,11 @@ db.once("open", () => {
   console.log("Database Connected");
 });
 
-app.listen(process.env.port||8080 ,() => {
-  console.log("Server Started");
+var server_port = process.env.YOUR_PORT || process.env.PORT || 8080;
+var server_host = process.env.YOUR_HOST || '0.0.0.0';
+app.listen(server_port, server_host, function() {
+    console.log(' Server Started , Listening on port %d', server_port);
 });
-
 
 var signupInfo, loginInfo, name, responses, placeSuggest;
 var flag = 0;
