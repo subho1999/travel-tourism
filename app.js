@@ -35,37 +35,36 @@ let placeSchema=mongoose.Schema({
     view:String
 })
 cities=[
-    {
-    name:"goa",
-    beach:'op1',
-    hiking:'op2',
-    history:'op1',
-    nature:'op1',
-    cities:'op1',
-    sweet:'op2',
-    spice:'op1',
-    surprise:'op1',
-    luxury:'op1',
-    room_service:'op1',
-    view:'op1',
-    },
+      {
+        name:"goa",
+        beach:'op1',
+        hiking:'op2',
+        history:'op1',
+        nature:'op1',
+        cities:'op1',
+        sweet:'op2',
+        spice:'op1',
+        surprise:'op1',
+        luxury:'op1',
+        room_service:'op1',
+        view:'op1',
+      },
 
-    luxury: "true",
-    room_service: "true",
-    view: "true"
-  },
-  {
-    name: "srinagar",
-    beach: "false",
-    hiking: "true",
-    history: "true",
-    nature: "true",
-    cities: "false",
-    sweet: "true",
-    spice: "false",
-    surprise: "true",
-
-{
+      {
+        name: "srinagar",
+        beach: "op2",
+        hiking: "op1",
+        history: "op1",
+        nature: "op1",
+        cities: "op2",
+        sweet: "op1",
+        spice: "op2",
+        surprise: "op1",
+        luxury: "op1",
+        room_service: "op1",
+        view: "op1"
+      },
+      {
         name:"rajasthan",
         beach:'op2',
         hiking:'op2',
@@ -79,7 +78,7 @@ cities=[
        room_service:'op1',
        view:'op1',
        },
-{
+      {
         name:"srinagar",
         beach:'op2',
         hiking:'op1',
@@ -92,7 +91,8 @@ cities=[
        luxury:'op1',
        room_service:'op2',
        view:'op1',
-       }];
+       }
+];
 var n=3;
 let login = new mongoose.model("log", userSchema);
 let place = new mongoose.model("place", placeSchema);
@@ -148,22 +148,6 @@ app.get("/logout", (req, res) => {
   res.render("logoutPage", { flag: flag, name: name });
 });
 
-app.post("/responses", (req, res) => {
-  responses = {
-    beach: req.body.beach,
-    hiking: req.body.hiking,
-    history: req.body.history,
-    nature: req.body.nature,
-    cities: req.body.cities,
-    sweet: req.body.sweet,
-    spice: req.body.spice,
-    surprise: req.body.surprise,
-    luxury: req.body.luxury,
-    room_service: req.body.room_service,
-    view: req.body.view
-  };
-
-
 app.post('/responses',(req,res)=>{
     responses={
         beach:req.body.beach,
@@ -202,6 +186,6 @@ app.get('/:route',(req,res)=>{
   res.render(strRoute,{ flag: flag, name: name })
 });
 
-app.listen(process.env.port||8080, () => {
+app.listen(process.env.port||8080 ,() => {
   console.log("Server Started");
 });
