@@ -21,7 +21,8 @@
     "request": "^2.88.0"
   },
   "devDependencies": {
-    "nodemon": "^1.19.4"
+    "nodemon": "^1.19.4",
+    "minimist": ">=1.2.2"
   },
   "repository": {
     "type": "git",
