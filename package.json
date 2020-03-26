@@ -1,5 +1,5 @@
 {
-  "name": "travel-and-tourism",
+  "name": "traveln-tourism",
   "version": "1.0.0",
   "description": "Additional Learning ",
   "main": "app.js",
@@ -22,5 +22,13 @@
   },
   "devDependencies": {
     "nodemon": "^1.19.4"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Advaitva/TravelNToday.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Advaitva/TravelNToday/issues"
+  },
+  "homepage": "https://github.com/Advaitva/TravelNToday#readme"
 }

@@ -12,7 +12,7 @@ db.on("error", console.error.bind(console, "Connnection Error -"));
 db.once("open", () => {
   console.log("Database Connected");
 });
-var signupInfo, loginInfo, name,responses;
+var signupInfo, loginInfo, name, responses, placeSuggest;
 var flag = 0;
 let userSchema = mongoose.Schema({
   fname: String,
@@ -50,6 +50,20 @@ cities=[
     view:'op1',
     },
 
+    luxury: "true",
+    room_service: "true",
+    view: "true"
+  },
+  {
+    name: "srinagar",
+    beach: "false",
+    hiking: "true",
+    history: "true",
+    nature: "true",
+    cities: "false",
+    sweet: "true",
+    spice: "false",
+    surprise: "true",
 
 {
         name:"rajasthan",
@@ -81,13 +95,12 @@ cities=[
        }];
 var n=3;
 let login = new mongoose.model("log", userSchema);
-let place=new mongoose.model('place',placeSchema);
-for(var i=0;i<n;i++){
-    place.create(cities[i],(err,response)=>{
-        if(err)
-        throw new Error(err);
-        else console.log('Data Added');
-    });
+let place = new mongoose.model("place", placeSchema);
+for (var i = 0; i < n; i++) {
+  place.create(cities[i], (err, response) => {
+    if (err) throw new Error(err);
+    else console.log("Data Added");
+  });
 }
 app.use(express.static(__dirname + "/public"));
 app.use(body.urlencoded({ extended: true }));
@@ -124,8 +137,8 @@ app.post("/loginCheck", (req, res) => {
       } else {
         flag = 1;
         res.redirect("/index");
+        name = response[0].fname + " " + response[0].lname;
       }
-      name = response[0].fname + " " + response[0].lname;
     }
   });
 });
@@ -135,6 +148,20 @@ app.get("/logout", (req, res) => {
   res.render("logoutPage", { flag: flag, name: name });
 });
 
+app.post("/responses", (req, res) => {
+  responses = {
+    beach: req.body.beach,
+    hiking: req.body.hiking,
+    history: req.body.history,
+    nature: req.body.nature,
+    cities: req.body.cities,
+    sweet: req.body.sweet,
+    spice: req.body.spice,
+    surprise: req.body.surprise,
+    luxury: req.body.luxury,
+    room_service: req.body.room_service,
+    view: req.body.view
+  };
 
 
 app.post('/responses',(req,res)=>{
