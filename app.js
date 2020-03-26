@@ -12,6 +12,12 @@ db.on("error", console.error.bind(console, "Connnection Error -"));
 db.once("open", () => {
   console.log("Database Connected");
 });
+
+app.listen(process.env.port||8080 ,() => {
+  console.log("Server Started");
+});
+
+
 var signupInfo, loginInfo, name, responses, placeSuggest;
 var flag = 0;
 let userSchema = mongoose.Schema({
@@ -189,6 +195,3 @@ app.get('/:route',(req,res)=>{
   res.render(strRoute,{ flag: flag, name: name })
 });
 
-app.listen(process.env.port||8080 ,() => {
-  console.log("Server Started");
-});
