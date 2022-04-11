@@ -22,7 +22,7 @@
     "request": "^2.88.0"
   },
   "devDependencies": {
-    "minimist": "^1.2.5",
+    "minimist": "^1.2.6",
     "nodemon": "^1.19.4"
   },
   "repository": {
